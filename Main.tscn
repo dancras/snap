@@ -11,99 +11,90 @@ __meta__ = {
 }
 
 [node name="GridContainer" type="GridContainer" parent="."]
-margin_right = 360.0
-margin_bottom = 640.0
+margin_right = 300.0
+margin_bottom = 520.0
+custom_constants/vseparation = -1
+custom_constants/hseparation = -1
 columns = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Card" parent="GridContainer" instance=ExtResource( 1 )]
-margin_left = 0.0
-margin_top = 0.0
-margin_right = 117.0
-margin_bottom = 124.0
-
 [node name="Card2" parent="GridContainer" instance=ExtResource( 1 )]
-margin_left = 121.0
-margin_top = 0.0
-margin_right = 238.0
-margin_bottom = 124.0
 rank = 1
+suit = 1
 
 [node name="Card3" parent="GridContainer" instance=ExtResource( 1 )]
-margin_left = 242.0
-margin_top = 0.0
-margin_right = 359.0
-margin_bottom = 124.0
+margin_left = 99.0
+margin_right = 199.0
 rank = 2
+suit = 2
 
 [node name="Card4" parent="GridContainer" instance=ExtResource( 1 )]
-margin_left = 0.0
-margin_top = 128.0
-margin_right = 117.0
-margin_bottom = 252.0
+margin_left = 198.0
+margin_right = 298.0
 rank = 3
+suit = 3
 
 [node name="Card5" parent="GridContainer" instance=ExtResource( 1 )]
-margin_left = 121.0
-margin_top = 128.0
-margin_right = 238.0
-margin_bottom = 252.0
+margin_top = 129.0
+margin_bottom = 259.0
 rank = 4
 
 [node name="Card6" parent="GridContainer" instance=ExtResource( 1 )]
-margin_left = 242.0
-margin_top = 128.0
-margin_right = 359.0
-margin_bottom = 252.0
+margin_left = 99.0
+margin_top = 129.0
+margin_right = 199.0
+margin_bottom = 259.0
 rank = 5
 
 [node name="Card7" parent="GridContainer" instance=ExtResource( 1 )]
-margin_left = 0.0
-margin_top = 256.0
-margin_right = 117.0
-margin_bottom = 380.0
+margin_left = 198.0
+margin_top = 129.0
+margin_right = 298.0
+margin_bottom = 259.0
 rank = 6
 
 [node name="Card8" parent="GridContainer" instance=ExtResource( 1 )]
-margin_left = 121.0
-margin_top = 256.0
-margin_right = 238.0
-margin_bottom = 380.0
+margin_top = 258.0
+margin_bottom = 388.0
 rank = 7
 
 [node name="Card9" parent="GridContainer" instance=ExtResource( 1 )]
-margin_left = 242.0
-margin_top = 256.0
-margin_right = 359.0
-margin_bottom = 380.0
+margin_left = 99.0
+margin_top = 258.0
+margin_right = 199.0
+margin_bottom = 388.0
 rank = 8
 
 [node name="Card10" parent="GridContainer" instance=ExtResource( 1 )]
-margin_left = 0.0
-margin_top = 384.0
-margin_right = 117.0
-margin_bottom = 508.0
+margin_left = 198.0
+margin_top = 258.0
+margin_right = 298.0
+margin_bottom = 388.0
 rank = 9
 
 [node name="Card11" parent="GridContainer" instance=ExtResource( 1 )]
-margin_left = 121.0
-margin_top = 384.0
-margin_right = 238.0
-margin_bottom = 508.0
+margin_top = 387.0
+margin_bottom = 517.0
 rank = 10
 
 [node name="Card12" parent="GridContainer" instance=ExtResource( 1 )]
-margin_left = 242.0
-margin_top = 384.0
-margin_right = 359.0
-margin_bottom = 508.0
+margin_left = 99.0
+margin_top = 387.0
+margin_right = 199.0
+margin_bottom = 517.0
 rank = 11
 
 [node name="Card13" parent="GridContainer" instance=ExtResource( 1 )]
-margin_left = 0.0
+visible = false
 margin_top = 512.0
 margin_right = 117.0
 margin_bottom = 636.0
 rank = 12
+
+[node name="Card" parent="." instance=ExtResource( 1 )]
+margin_left = 198.104
+margin_top = 387.07
+margin_right = 298.104
+margin_bottom = 517.07

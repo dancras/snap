@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://fonts/Quivira.otf" type="DynamicFontData" id=1]
 [ext_resource path="res://Card.gd" type="Script" id=2]
@@ -28,15 +28,23 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
+[sub_resource type="DynamicFont" id=4]
+size = 48
+extra_spacing_top = -4
+font_data = ExtResource( 1 )
+
 [sub_resource type="DynamicFont" id=2]
-size = 64
+size = 24
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 52
+extra_spacing_bottom = -7
 font_data = ExtResource( 1 )
 
 [node name="Card" type="Button"]
-margin_left = 218.997
-margin_top = 136.831
-margin_right = 319.997
-margin_bottom = 271.831
+margin_right = 100.0
+margin_bottom = 130.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/pressed = SubResource( 3 )
@@ -47,34 +55,40 @@ __meta__ = {
 }
 
 [node name="Rank" type="Label" parent="."]
-margin_top = 0.308151
-margin_right = 71.0
-margin_bottom = 76.3082
-rect_scale = Vector2( 0.6, 0.6 )
-custom_fonts/font = SubResource( 2 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 5.0
+margin_right = -49.0
+margin_bottom = -77.0
+custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 1, 0, 0, 1 )
 text = "10"
-align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="."]
-anchor_left = 1.0
-anchor_top = 1.0
+[node name="Suit" type="Label" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -71.6495
-margin_top = -107.072
-margin_right = 128.351
-margin_bottom = 205.928
-rect_scale = Vector2( 0.33, 0.33 )
+margin_right = -5.0
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 1, 0, 0, 1 )
-text = "♥
-♥♥
-♥♥♥
-♥♥♥♥"
+text = "♥"
+align = 2
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SuitLarge" type="Label" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -0.207825
+margin_right = -3.0
+margin_bottom = -0.207825
+custom_fonts/font = SubResource( 5 )
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+text = "♥"
 align = 2
 valign = 2
 __meta__ = {
