@@ -122,6 +122,13 @@ export(Suit) var suit: int
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+    set_rank_to_nodes()
+
+    $Rank.add_color_override("font_color", SUIT_CONFIG[suit].color)
+    $Suit.add_color_override("font_color", SUIT_CONFIG[suit].color)
+    $SuitLarge.add_color_override("font_color", SUIT_CONFIG[suit].color)
+
+func set_rank_to_nodes():
     var rank_config = RANK_CONFIG[rank]
     var active_suit = $Suit
 
@@ -138,9 +145,10 @@ func _ready():
     $Rank.text = rank_config.text
     active_suit.text = rank_config.symbol_format.replace("x", SUIT_CONFIG[suit].symbol)
 
-    $Rank.add_color_override("font_color", SUIT_CONFIG[suit].color)
-    active_suit.add_color_override("font_color", SUIT_CONFIG[suit].color)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#    pass
+func can_drop_data(position, data):
+    return true
+
+func drop_data(position, data):
+    rank += 1
+    set_rank_to_nodes()

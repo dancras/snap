@@ -89,6 +89,3 @@ custom_styles/normal = SubResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="button_down" from="TopDeck" to="TopDeck" method="_on_TopDeck_button_down"]
-[connection signal="button_up" from="TopDeck" to="TopDeck" method="_on_TopDeck_button_up"]
-[connection signal="dragged" from="TopDeck" to="." method="_on_TopDeck_dragged"]
