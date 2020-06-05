@@ -7,8 +7,10 @@ func _ready():
 
 func get_drag_data(position):
     var preview = duplicate()
+    preview.add_stylebox_override(
+        "normal",
+        preview.get("custom_styles/pressed")
+    )
     set_drag_preview(preview)
-    return {
-        "type": "card"
-    }
 
+    return get_parent().get_drag_data(position)

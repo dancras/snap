@@ -1,12 +1,14 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Card.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Deck.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Main.gd" type="Script" id=3]
 
-[node name="ColorRect" type="ColorRect"]
+[node name="Main" type="ColorRect"]
 margin_right = 360.0
 margin_bottom = 640.0
 color = Color( 0.32549, 0.556863, 0.415686, 1 )
+script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -23,86 +25,77 @@ __meta__ = {
 }
 
 [node name="Card2" parent="GridContainer" instance=ExtResource( 1 )]
-rank = 1
-suit = 1
 
 [node name="Card3" parent="GridContainer" instance=ExtResource( 1 )]
 margin_left = 99.0
 margin_right = 199.0
-rank = 2
-suit = 2
 
 [node name="Card4" parent="GridContainer" instance=ExtResource( 1 )]
 margin_left = 198.0
 margin_right = 298.0
-rank = 3
-suit = 3
 
 [node name="Card5" parent="GridContainer" instance=ExtResource( 1 )]
 margin_top = 129.0
 margin_bottom = 259.0
-rank = 4
 
 [node name="Card6" parent="GridContainer" instance=ExtResource( 1 )]
 margin_left = 99.0
 margin_top = 129.0
 margin_right = 199.0
 margin_bottom = 259.0
-rank = 5
 
 [node name="Card7" parent="GridContainer" instance=ExtResource( 1 )]
 margin_left = 198.0
 margin_top = 129.0
 margin_right = 298.0
 margin_bottom = 259.0
-rank = 6
 
 [node name="Card8" parent="GridContainer" instance=ExtResource( 1 )]
 margin_top = 258.0
 margin_bottom = 388.0
-rank = 7
 
 [node name="Card9" parent="GridContainer" instance=ExtResource( 1 )]
 margin_left = 99.0
 margin_top = 258.0
 margin_right = 199.0
 margin_bottom = 388.0
-rank = 8
 
 [node name="Card10" parent="GridContainer" instance=ExtResource( 1 )]
 margin_left = 198.0
 margin_top = 258.0
 margin_right = 298.0
 margin_bottom = 388.0
-rank = 9
 
 [node name="Card11" parent="GridContainer" instance=ExtResource( 1 )]
 margin_top = 387.0
 margin_bottom = 517.0
-rank = 10
 
 [node name="Card12" parent="GridContainer" instance=ExtResource( 1 )]
 margin_left = 99.0
 margin_top = 387.0
 margin_right = 199.0
 margin_bottom = 517.0
-rank = 11
 
 [node name="Card13" parent="GridContainer" instance=ExtResource( 1 )]
 visible = false
 margin_top = 512.0
 margin_right = 117.0
 margin_bottom = 636.0
-rank = 12
 
 [node name="Card" parent="." instance=ExtResource( 1 )]
-margin_left = 129.7
-margin_top = 254.347
-margin_right = 229.7
-margin_bottom = 384.347
+margin_left = 174.514
+margin_top = 42.8657
+margin_right = 274.514
+margin_bottom = 172.866
 
-[node name="Deck" parent="." instance=ExtResource( 2 )]
-margin_left = 247.499
-margin_top = 255.099
-margin_right = -12.5007
-margin_bottom = -254.901
+[node name="DrawDeck" parent="." instance=ExtResource( 2 )]
+margin_left = 221.163
+margin_top = 243.671
+margin_right = -38.8368
+margin_bottom = -248.329
+
+[node name="PlayDeck" parent="." instance=ExtResource( 2 )]
+margin_left = 92.9669
+margin_top = 244.16
+margin_right = -167.033
+margin_bottom = -247.84
