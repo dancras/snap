@@ -1,5 +1,7 @@
 extends Control
 
+export var face_up = false
+
 # A card is [suit: int, rank: int]
 var cards = []
 
@@ -8,6 +10,9 @@ const PILE_BASE = 121
 
 
 func _ready():
+    $TopDeck/CardBack.visible = !face_up
+    $TopDeck/CardFront.visible = face_up
+
     update_children()
 
 
@@ -33,7 +38,7 @@ func update_pile_nodes():
     for child in get_children():
         child.hide()
 
-    $EmptyDeck.show()
+    $EmptyDeck.visible = total_cards == 0
 
     $TopDeck.visible = total_cards > 0
     $TopDeck.rect_position.y = TOP_DECK_BASE - (total_cards / 54.0) * 18
@@ -58,6 +63,14 @@ func update_top_deck():
         $TopDeck.show()
         $TopDeck.set_suit_and_rank(card_data[0], card_data[1])
 
+func get_drag_data(_position):
+    var drag_card = cards.pop_back()
+    update_children()
+    return drag_card
 
-func _on_TopDeck_dragged():
-    $TopDeck.rect_global_position = rect_global_position
+func can_drop_data(position, data):
+    return true
+
+func drop_data(position, data):
+    cards.push_back(data)
+    update_children()

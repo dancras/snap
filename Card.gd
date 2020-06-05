@@ -30,10 +30,17 @@ export(Suit) var suit: int
 func _ready():
     pass # Replace with function body.
 
-func set_suit_and_rank(suit, rank):
-    suit = suit
-    rank = rank
+func set_suit_and_rank(new_suit, new_rank):
+    suit = new_suit
+    rank = new_rank
     $CardFront.set_suit_and_rank(suit, rank)
 
+func can_drop_data(position, data):
+    return get_parent().can_drop_data(position, data)
+
+func drop_data(position, data):
+    return get_parent().drop_data(position, data)
+
 func get_drag_data(position):
-    return get_parent().cards.back()
+    return get_parent().get_drag_data(position)
+

@@ -127,9 +127,7 @@ func set_suit_and_rank(suit, rank):
 
 
 func can_drop_data(position, data):
-    return true
+    return get_parent().can_drop_data(position, data)
 
 func drop_data(position, data):
-    pass
-#    rank += 1
-#    set_rank_to_nodes()
+    get_parent().drop_data(position, data)
