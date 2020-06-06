@@ -65,12 +65,17 @@ func update_top_deck():
 
 func get_drag_data(_position):
     var drag_card = cards.pop_back()
+    get_node("/root/Main/DragManager").starting_drag(self, drag_card)
     update_children()
     return drag_card
+
+func revert_drag(data):
+    cards.push_back(data)
 
 func can_drop_data(position, data):
     return true
 
 func drop_data(position, data):
     cards.push_back(data)
+    get_node("/root/Main/DragManager").drop_success()
     update_children()
