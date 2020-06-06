@@ -71,10 +71,10 @@ func get_drag_data(_position):
 func revert_drag(data):
     cards.push_back(data)
 
-func can_drop_data(position, data):
+func can_drop_data(_position, _data):
     return true
 
-func drop_data(position, data):
+func drop_data(_position, data):
     cards.push_back(data)
     get_node("/root/Main/DragManager").drop_success()
     update_children()
