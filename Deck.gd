@@ -55,11 +55,10 @@ func update_pile_nodes():
 
 
 func update_top_deck():
-    var card_data = cards.back()
-
-    if (card_data == null):
+    if (len(cards) == 0):
         $TopDeck.hide()
     else:
+        var card_data = cards.back()
         $TopDeck.show()
         $TopDeck.set_suit_and_rank(card_data[0], card_data[1])
 
