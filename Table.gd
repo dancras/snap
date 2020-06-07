@@ -11,6 +11,10 @@ func _ready():
     pass
 
 func master_init_table():
+    var p1_deck_position = $P1Deck.rect_position
+    $P1Deck.rect_position = $P2Deck.rect_position
+    $P2Deck.rect_position = p1_deck_position
+
     $DrawDeck.rect_position = $DrawDeckAltPosition.position
 
     randomize()
@@ -33,6 +37,13 @@ remote func update_dragging_card(_drag_data, position):
         get_viewport().size - position - $DraggingCard.rect_size
     )
 
+remote func hide_dragging_card():
+    $DraggingCard.hide()
+
 
 func notify_dragging(drag_data, position):
     rpc("update_dragging_card", drag_data, position)
+
+
+func notify_drag_complete():
+    rpc("hide_dragging_card")

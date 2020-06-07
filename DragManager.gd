@@ -1,6 +1,7 @@
 extends Node
 
 signal drag_position(drag_data, position)
+signal drag_complete
 
 var drag_origin
 var drag_data
@@ -20,6 +21,7 @@ func poll_viewport_for_grab_status():
     elif is_dragging():
         drag_origin.revert_drag(drag_data)
         clear_drag_data()
+        emit_signal("drag_complete")
 
 func starting_drag(origin, data):
     drag_origin = origin
@@ -28,6 +30,7 @@ func starting_drag(origin, data):
 
 func drop_success():
     clear_drag_data()
+    emit_signal("drag_complete")
 
 func clear_drag_data():
     drag_origin = null

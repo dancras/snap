@@ -29,4 +29,5 @@ __meta__ = {
 
 [node name="DragManager" type="Node" parent="."]
 script = ExtResource( 4 )
+[connection signal="drag_complete" from="DragManager" to="Table" method="notify_drag_complete"]
 [connection signal="drag_position" from="DragManager" to="Table" method="notify_dragging"]

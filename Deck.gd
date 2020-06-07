@@ -64,17 +64,25 @@ func update_top_deck():
 
 func get_drag_data(_position):
     var drag_card = cards.pop_back()
+    rpc("pop_card")
     get_node("/root/Main/DragManager").starting_drag(self, drag_card)
     update_children()
     return drag_card
 
 func revert_drag(data):
-    cards.push_back(data)
+    rpc("push_card", data)
 
 func can_drop_data(_position, _data):
     return true
 
 func drop_data(_position, data):
-    cards.push_back(data)
+    rpc("push_card", data)
     get_node("/root/Main/DragManager").drop_success()
+
+remotesync func push_card(data):
+    cards.push_back(data)
     update_children()
+
+
+remote func pop_card():
+    cards.pop_back()
