@@ -125,6 +125,8 @@ func set_suit_and_rank(suit, rank):
     $Suit.add_color_override("font_color", SUIT_CONFIG[suit].color)
     $SuitLarge.add_color_override("font_color", SUIT_CONFIG[suit].color)
 
+func get_drag_data(position):
+    return get_parent().get_drag_data(position)
 
 func can_drop_data(position, data):
     return get_parent().can_drop_data(position, data)

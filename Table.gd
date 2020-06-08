@@ -31,7 +31,9 @@ remote func receive_draw_deck(cards):
 #func _process(delta):
 #    pass
 
-remote func update_dragging_card(_drag_data, position):
+remote func update_dragging_card(drag_data, position):
+    $DraggingCard.set_face_up(drag_data.face_up)
+    $DraggingCard.set_suit_and_rank(drag_data.card[0], drag_data.card[1])
     $DraggingCard.show()
     $DraggingCard.set_global_position(
         get_viewport().size - position - $DraggingCard.rect_size

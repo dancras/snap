@@ -10,8 +10,7 @@ const PILE_BASE = 121
 
 
 func _ready():
-    $TopDeck/CardBack.visible = !face_up
-    $TopDeck/CardFront.visible = face_up
+    $TopDeck.set_face_up(face_up)
 
     update_children()
 
@@ -63,26 +62,30 @@ func update_top_deck():
         $TopDeck.set_suit_and_rank(card_data[0], card_data[1])
 
 func get_drag_data(_position):
-    var drag_card = cards.pop_back()
+    set_drag_preview($TopDeck.get_drag_preview(face_up))
+    var drag_data = {
+        "card": cards.pop_back(),
+        "face_up": face_up
+    }
+    get_node("/root/Main/DragManager").starting_drag(self, drag_data)
     rpc("pop_card")
-    get_node("/root/Main/DragManager").starting_drag(self, drag_card)
     update_children()
-    return drag_card
+    return drag_data
 
 func revert_drag(data):
-    rpc("push_card", data)
+    rpc("push_card", data.card)
 
 func can_drop_data(_position, _data):
     return true
 
 func drop_data(_position, data):
-    rpc("push_card", data)
+    rpc("push_card", data.card)
     get_node("/root/Main/DragManager").drop_success()
 
-remotesync func push_card(data):
-    cards.push_back(data)
+remotesync func push_card(card):
+    cards.push_back(card)
     update_children()
-
 
 remote func pop_card():
     cards.pop_back()
+    update_children()

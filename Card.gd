@@ -44,3 +44,16 @@ func drop_data(position, data):
 func get_drag_data(position):
     return get_parent().get_drag_data(position)
 
+func get_drag_preview(face_up):
+    var card_node = $CardFront if face_up else $CardBack
+
+    var preview = card_node.duplicate()
+    preview.add_stylebox_override(
+        "normal",
+        preview.get("custom_styles/pressed")
+    )
+    return preview
+
+func set_face_up(face_up):
+    $CardBack.visible = !face_up
+    $CardFront.visible = face_up
