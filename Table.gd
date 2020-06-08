@@ -8,7 +8,7 @@ extends ColorRect
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-    pass
+    $DraggingCard.set_always_pressed()
 
 func master_init_table():
     var p1_deck_position = $P1Deck.rect_position

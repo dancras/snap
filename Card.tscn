@@ -164,3 +164,9 @@ enabled_focus_mode = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
+[connection signal="button_up" from="CardFront" to="CardFront" method="_on_CardFront_button_up"]
+[connection signal="mouse_entered" from="CardFront" to="CardFront" method="_on_CardFront_mouse_entered"]
+[connection signal="mouse_exited" from="CardFront" to="CardFront" method="_on_CardFront_mouse_exited"]
+[connection signal="button_up" from="CardBack" to="CardBack" method="_on_CardBack_button_up"]
+[connection signal="mouse_entered" from="CardBack" to="CardBack" method="_on_CardBack_mouse_entered"]
+[connection signal="mouse_exited" from="CardBack" to="CardBack" method="_on_CardBack_mouse_exited"]

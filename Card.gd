@@ -57,3 +57,13 @@ func get_drag_preview(face_up):
 func set_face_up(face_up):
     $CardBack.visible = !face_up
     $CardFront.visible = face_up
+
+func set_always_pressed():
+    $CardFront.add_stylebox_override(
+        "normal",
+        $CardFront.get("custom_styles/pressed")
+    )
+    $CardBack.add_stylebox_override(
+        "normal",
+        $CardBack.get("custom_styles/pressed")
+    )
