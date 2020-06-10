@@ -125,3 +125,4 @@ visible = false
 
 [node name="DrawDeckAltPosition" type="Position2D" parent="."]
 position = Vector2( 16, 246 )
+[connection signal="card_pushed" from="PlayDeck" to="." method="_on_PlayDeck_card_pushed"]

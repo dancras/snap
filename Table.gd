@@ -1,9 +1,6 @@
 extends ColorRect
 
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+var master_turn = true
 
 
 # Called when the node enters the scene tree for the first time.
@@ -21,10 +18,23 @@ func master_init_table():
     $DrawDeck.fill_deck()
     rpc("receive_draw_deck", $DrawDeck.cards)
 
+    master_turn = randi() % 2 == 0
+    next_turn()
+
 remote func receive_draw_deck(cards):
     $DrawDeck.cards = cards
     $DrawDeck.update_children()
 
+
+remote func set_decks_disabled(disable):
+    $DrawDeck.set_disabled(disable)
+    $PlayDeck.set_disabled(disable)
+
+
+master func next_turn():
+    master_turn = !master_turn
+    set_decks_disabled(!master_turn)
+    rpc("set_decks_disabled", master_turn)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -49,3 +59,7 @@ func notify_dragging(drag_data, position):
 
 func notify_drag_complete():
     rpc("hide_dragging_card")
+
+
+func _on_PlayDeck_card_pushed():
+    next_turn()

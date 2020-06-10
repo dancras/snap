@@ -67,3 +67,7 @@ func set_always_pressed():
         "normal",
         $CardBack.get("custom_styles/pressed")
     )
+
+func set_disabled(disabled):
+    $CardFront.disabled = disabled
+    $CardBack.disabled = disabled

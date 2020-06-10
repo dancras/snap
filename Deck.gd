@@ -1,9 +1,12 @@
 extends Control
 
+signal card_pushed
+
 export var face_up = false
 
 # A card is [suit: int, rank: int]
 var cards = []
+var deck_disabled = false
 
 const TOP_DECK_BASE = 18
 const PILE_BASE = 121
@@ -62,6 +65,9 @@ func update_top_deck():
         $TopDeck.set_suit_and_rank(card_data[0], card_data[1])
 
 func get_drag_data(_position):
+    if deck_disabled:
+        return null
+
     set_drag_preview($TopDeck.get_drag_preview(face_up))
     var drag_data = {
         "card": cards.pop_back(),
@@ -76,7 +82,7 @@ func revert_drag(data):
     rpc("push_card", data.card)
 
 func can_drop_data(_position, _data):
-    return true
+    return !deck_disabled
 
 func drop_data(_position, data):
     rpc("push_card", data.card)
@@ -85,7 +91,14 @@ func drop_data(_position, data):
 remotesync func push_card(card):
     cards.push_back(card)
     update_children()
+    emit_signal("card_pushed")
+
 
 remote func pop_card():
     cards.pop_back()
     update_children()
+
+
+func set_disabled(disabled):
+    deck_disabled = disabled
+    $TopDeck.set_disabled(disabled)
