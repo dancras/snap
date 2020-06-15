@@ -1,8 +1,27 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Card.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Deck.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Table.gd" type="Script" id=3]
+[ext_resource path="res://fonts/Quivira.otf" type="DynamicFontData" id=4]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.0941176, 0.360784, 0.870588, 1 )
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.0941176, 0.2, 0.403922, 1 )
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
+[sub_resource type="DynamicFont" id=2]
+size = 32
+font_data = ExtResource( 4 )
 
 [node name="Table" type="ColorRect"]
 margin_right = 360.0
@@ -91,6 +110,9 @@ margin_top = -74.0
 margin_right = -16.0
 margin_bottom = 74.0
 
+[node name="DrawDeckAltPosition" type="Position2D" parent="."]
+position = Vector2( 16, 246 )
+
 [node name="PlayDeck" parent="." instance=ExtResource( 2 )]
 anchor_left = 0.5
 anchor_top = 0.5
@@ -123,6 +145,34 @@ margin_bottom = 164.0
 [node name="DraggingCard" parent="." instance=ExtResource( 1 )]
 visible = false
 
-[node name="DrawDeckAltPosition" type="Position2D" parent="."]
-position = Vector2( 16, 246 )
+[node name="SnapButton" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -60.0
+margin_top = -60.0
+margin_right = 60.0
+margin_bottom = 60.0
+custom_styles/hover = SubResource( 1 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/normal = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="SnapButton"]
+margin_right = 120.0
+margin_bottom = 120.0
+custom_fonts/font = SubResource( 2 )
+text = "SNAP!"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SnapTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
 [connection signal="card_pushed" from="PlayDeck" to="." method="_on_PlayDeck_card_pushed"]

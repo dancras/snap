@@ -6,6 +6,7 @@ var master_turn = true
 # Called when the node enters the scene tree for the first time.
 func _ready():
     $DraggingCard.set_always_pressed()
+    $SnapButton.hide()
 
 func master_init_table():
     var p1_deck_position = $P1Deck.rect_position
@@ -60,6 +61,10 @@ func notify_dragging(drag_data, position):
 func notify_drag_complete():
     rpc("hide_dragging_card")
 
-
 func _on_PlayDeck_card_pushed():
+    set_decks_disabled(true)
+    $SnapButton.show()
+    $SnapTimer.start()
+    yield($SnapTimer, "timeout")
+    $SnapButton.hide()
     next_turn()
