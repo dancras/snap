@@ -1,7 +1,15 @@
 extends ColorRect
 
 var master_turn = true
+var card_reveal_local_time
+var master_snap_time = null
+var puppet_snap_time = null
 
+enum TurnOutcome {
+    NONE,
+    MASTER_WIN,
+    PUPPET_WIN
+}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -62,9 +70,60 @@ func notify_drag_complete():
     rpc("hide_dragging_card")
 
 func _on_PlayDeck_card_pushed():
+    card_reveal_local_time = OS.get_system_time_msecs()
     set_decks_disabled(true)
     $SnapButton.show()
     $SnapTimer.start()
     yield($SnapTimer, "timeout")
     $SnapButton.hide()
+    rpc("process_snap_times")
     next_turn()
+
+master func process_snap_times():
+    var outcome = get_turn_outcome()
+
+    if outcome == TurnOutcome.MASTER_WIN:
+        $P1Deck.push_cards_sync($PlayDeck.cards)
+        $PlayDeck.clear_cards_sync()
+    elif outcome == TurnOutcome.PUPPET_WIN:
+        $P2Deck.push_cards_sync($PlayDeck.cards)
+        $PlayDeck.clear_cards_sync()
+
+    master_snap_time = null
+    puppet_snap_time = null
+
+
+func get_turn_outcome():
+    var master_snap = TurnOutcome.MASTER_WIN
+    var puppet_snap = TurnOutcome.PUPPET_WIN
+
+    if master_snap_time == null && puppet_snap_time == null:
+        return TurnOutcome.NONE
+
+    if $PlayDeck.cards[-1][1] != $PlayDeck.cards[-2][1]:
+        if master_snap_time != null && puppet_snap_time != null:
+            return TurnOutcome.NONE
+
+        master_snap = TurnOutcome.PUPPET_WIN
+        puppet_snap = TurnOutcome.MASTER_WIN
+
+    if master_snap_time != null && (puppet_snap_time == null || master_snap_time < puppet_snap_time):
+        return master_snap
+    else:
+        return puppet_snap
+
+
+func _on_SnapButton_button_down():
+    $SnapButton.disabled = true
+    var local_snap_time = OS.get_system_time_msecs() - card_reveal_local_time
+    set_snap_time(local_snap_time)
+    send_snap_time(local_snap_time)
+
+master func set_snap_time(snap_time):
+    master_snap_time = snap_time
+
+remote func receive_snap_time(snap_time):
+    puppet_snap_time = snap_time
+
+puppet func send_snap_time(snap_time):
+    rpc("receive_snap_time", snap_time)

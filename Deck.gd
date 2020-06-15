@@ -88,6 +88,21 @@ func drop_data(_position, data):
     rpc("push_card", data.card)
     get_node("/root/Main/DragManager").drop_success()
 
+
+func clear_cards_sync():
+    rpc("clear_cards")
+
+remotesync func clear_cards():
+    cards = []
+    update_children()
+
+func push_cards_sync(new_cards):
+    rpc("push_cards", new_cards)
+
+remotesync func push_cards(new_cards):
+    cards = cards + new_cards
+    update_children()
+
 remotesync func push_card(card):
     cards.push_back(card)
     update_children()
