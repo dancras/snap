@@ -1,5 +1,7 @@
 extends ColorRect
 
+const Deck = preload("res://Deck.tscn")
+
 var master_turn = true
 var card_reveal_local_time
 var master_snap_time = null
@@ -16,18 +18,32 @@ func _ready():
     $DraggingCard.set_always_pressed()
     $SnapButton.hide()
 
-func master_init_table():
-    var p1_deck_position = $P1Deck.rect_position
-    $P1Deck.rect_position = $P2Deck.rect_position
-    $P2Deck.rect_position = p1_deck_position
+func master_init_table(players):
+    $TableState.start_new_table(players)
+    $TableState.start_new_game()
 
-    $DrawDeck.rect_position = $DrawDeckAltPosition.position
+func init_table(players):
 
-    randomize()
+    var my_id = get_tree().get_network_unique_id()
+
+    for child in $PlayerDecks.get_children():
+        $PlayerDecks.remove_child(child)
+        child.queue_free()
+
+    for player_id in players:
+        var player_deck = Deck.instance()
+        var position_node = $MyDeckPosition if player_id == my_id else $TheirDeckPosition
+        player_deck.rect_position = position_node.position
+
+    if players[0] == my_id:
+        $DrawDeck.rect_position = $DrawDeckAltPosition.position
+
+
+func init_game(current_turn_id):
     $DrawDeck.fill_deck()
     rpc("receive_draw_deck", $DrawDeck.cards)
 
-    master_turn = randi() % 2 == 0
+    master_turn = current_turn_id == 1
     next_turn()
 
 remote func receive_draw_deck(cards):

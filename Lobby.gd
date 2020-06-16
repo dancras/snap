@@ -30,7 +30,7 @@ func _player_connected(id):
     hide()
 
     if is_master:
-        get_parent().get_node("Table").master_init_table()
+        get_parent().get_node("Table").master_init_table([1, id])
 
 func _connected_ok():
     $Log.text += "\nConnection Success!"

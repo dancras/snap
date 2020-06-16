@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Card.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Deck.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Table.gd" type="Script" id=3]
 [ext_resource path="res://fonts/Quivira.otf" type="DynamicFontData" id=4]
+[ext_resource path="res://TableState.gd" type="Script" id=5]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.0941176, 0.360784, 0.870588, 1 )
@@ -12,14 +13,14 @@ corner_radius_top_right = 50
 corner_radius_bottom_right = 50
 corner_radius_bottom_left = 50
 
-[sub_resource type="StyleBoxFlat" id=3]
+[sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0.0941176, 0.2, 0.403922, 1 )
 corner_radius_top_left = 50
 corner_radius_top_right = 50
 corner_radius_bottom_right = 50
 corner_radius_bottom_left = 50
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=3]
 size = 32
 font_data = ExtResource( 4 )
 
@@ -31,6 +32,9 @@ script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="TableState" type="Node" parent="."]
+script = ExtResource( 5 )
 
 [node name="GridContainer" type="GridContainer" parent="."]
 visible = false
@@ -124,6 +128,14 @@ margin_right = 50.0
 margin_bottom = 74.0
 face_up = true
 
+[node name="MyDeckPosition" type="Position2D" parent="."]
+position = Vector2( 130, 476 )
+
+[node name="TheirDeckPosition" type="Position2D" parent="."]
+position = Vector2( 130, 16 )
+
+[node name="PlayerDecks" type="Node" parent="."]
+
 [node name="P2Deck" parent="." instance=ExtResource( 2 )]
 anchor_left = 0.5
 anchor_top = 1.0
@@ -155,8 +167,8 @@ margin_top = 43.0
 margin_right = 60.0
 margin_bottom = 163.0
 custom_styles/hover = SubResource( 1 )
-custom_styles/pressed = SubResource( 3 )
-custom_styles/disabled = SubResource( 3 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/disabled = SubResource( 2 )
 custom_styles/normal = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -165,7 +177,7 @@ __meta__ = {
 [node name="Label" type="Label" parent="SnapButton"]
 margin_right = 120.0
 margin_bottom = 120.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 text = "SNAP!"
 align = 1
 valign = 1
